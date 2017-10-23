@@ -25,6 +25,7 @@ import javax.swing.JPanel;
  */
 public class Lienzo extends JPanel {
     private BufferedImage imagen;
+    private BufferedImage imagenOriginal;
 
     public Lienzo() {
         setBackground(Color.WHITE);
@@ -35,8 +36,17 @@ public class Lienzo extends JPanel {
         this.imagen = imagen;
     }
 
+    public void setImagenOriginal(BufferedImage imagenOriginal) {
+        this.imagenOriginal = imagenOriginal;
+    }
+    
+    
     public BufferedImage getImagen() {
         return imagen;
+    }
+    
+    public BufferedImage getImagenOriginal() {
+        return imagenOriginal;
     }
     
     @Override

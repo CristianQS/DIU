@@ -166,9 +166,18 @@ public class Practica5 extends javax.swing.JFrame {
     
     private void loadImage(File file) {
         try {
+            System.out.println(file.getAbsolutePath());
             BufferedImage image = ImageIO.read(file);
-            lienzo.setImagen(image);
-            repaint();
+            if(image != null){
+                lienzo.setImagen(image);
+                lienzo.setImagenOriginal(image);
+                repaint();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Debe introducir"
+                    + " una imagen","Error al cargar imagen",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(Practica5.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,7 +197,14 @@ public class Practica5 extends javax.swing.JFrame {
 
     private void saveImage(File file) {
         try {
-            ImageIO.write(lienzo.getImagen(),"jpg",file);
+            if(file.exists()){
+                int res = JOptionPane.showConfirmDialog(rootPane, "Este fichero "
+                        + "ya exite ¿Está seguro que quiere sobrescribir la imagen?", 
+                        "Sobresccribir Imagen", JOptionPane.YES_NO_OPTION);
+                if(res == JOptionPane.YES_OPTION)ImageIO.write(lienzo.getImagen(),"jpg",file);
+            }else{
+              ImageIO.write(lienzo.getImagen(),"jpg",file);  
+            }
         } catch (IOException ex) {
             Logger.getLogger(Practica5.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,7 +230,7 @@ public class Practica5 extends javax.swing.JFrame {
             int value = Integer.parseInt((String)JOptionPane.showInputDialog(rootPane,"Intoduzca un "
                     + "valor para el umbralizado","Umbralizar",
                     JOptionPane.YES_NO_CANCEL_OPTION,null,null,100));
-            BufferedImage imangenUmbralizada = lienzo.umbralizar(lienzo.getImagen(), value);
+            BufferedImage imangenUmbralizada = lienzo.umbralizar(lienzo.getImagenOriginal(), value);
             lienzo.setImagen(imangenUmbralizada);
             repaint();  
         }else{
