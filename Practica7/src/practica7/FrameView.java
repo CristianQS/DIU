@@ -5,6 +5,8 @@
  */
 package practica7;
 
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +69,11 @@ public class FrameView extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -153,12 +160,24 @@ public class FrameView extends javax.swing.JFrame {
             BufferedImage imangenUmbralizada = ventanainterna.umbralizar(image, Integer.parseInt(value));
             String umbralTitulo = imageName+"_umbral_"+value;
             crearVentana(imangenUmbralizada,umbralTitulo);
+            ventanainterna.setClosable(true);
             //repaint();  
         }else{
             JOptionPane.showMessageDialog(rootPane, "Debe abrir una imagen "
                     + "primero", "Error al umbralizar", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_umbralizarItemActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        // TODO add your handling code here:
+        JInternalFrame [] ventanas = escritorio.getAllFrames();
+        int contador = 0;
+        for (JInternalFrame ventana : ventanas) {
+            ventana.setLocation(new Point(contador*20,contador*20));
+            contador++;
+        }
+        contador = 0;
+    }//GEN-LAST:event_formComponentResized
 
     /**
      * @param args the command line arguments
@@ -225,8 +244,9 @@ public class FrameView extends javax.swing.JFrame {
         ventanainterna = new VentanaInterna();
         escritorio.add(ventanainterna);
         numVentanas++;
-        ventanainterna.setClosable(true);
         ventanainterna.setResizable(true);
+        ventanainterna.setIconifiable(true);
+        ventanainterna.setMaximizable(true);
         ventanainterna.setImagen(imagenMuestra);
         ventanainterna.setTitle(titulo);
         ventanainterna.setLocation(numVentanas*20, numVentanas*20);
