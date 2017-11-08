@@ -161,7 +161,6 @@ public class FrameView extends javax.swing.JFrame {
             String umbralTitulo = imageName+"_umbral_"+value;
             crearVentana(imangenUmbralizada,umbralTitulo);
             ventanainterna.setClosable(true);
-            //repaint();  
         }else{
             JOptionPane.showMessageDialog(rootPane, "Debe abrir una imagen "
                     + "primero", "Error al umbralizar", JOptionPane.ERROR_MESSAGE);

@@ -74,7 +74,6 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
 
     public void setImagen(BufferedImage imagen) {
         lienzo1.setImagen(imagen);
-        //repaint();
     }
 
     public BufferedImage getImagen() {
