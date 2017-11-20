@@ -322,8 +322,8 @@ public class FrameVIew extends javax.swing.JFrame {
             Logger.getLogger(FrameVIew.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/db?zeroDateTimeBehavior=convertToNull","root","");
-            //Connection con = DriverManager.getConnection("jdbc:mysql://mozart.dis.ulpgc.es/PracticaDIU?useSSL=true","estudiante-DIU","diU-17-18");
+            //Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/db?zeroDateTimeBehavior=convertToNull","root","");
+            Connection con = DriverManager.getConnection("jdbc:mysql://mozart.dis.ulpgc.es/PracticaDIU","estudiante-DIU","diU-17-18");
             md = con.getMetaData();
             String[] types ={"TABLE"};
             ResultSet rs = md.getTables(null,null,"%",types);
